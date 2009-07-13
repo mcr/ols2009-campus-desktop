@@ -1,0 +1,28 @@
+Package: xds-thintropy-trial1
+Version: $(VER)
+Section: xds
+Priority: required
+Architecture: all
+Provides: xds-thintropy-trial1
+Depends: wget, curl, libc6-xen, thintropyvnc4server, libyaml-tiny-perl,
+ anacron, ca-certificates, bind9-host, dnsutils, less, dbus-1-utils, defoma,
+ dictionaries-common, openssh-client, ssh-askpass, nfs-common, portmap,
+ iputils-tracepath, acroread, mozilla-acroread, acroread-plugins, xfdesktop4,
+ xubuntu-desktop, xubuntu-docs, xterm, xubuntu-artwork-usplash,
+ xubuntu-default-settings, xubuntu-desktop, xubuntu-system-tools, xvncviewer,
+ xrgb, xrandr, xlsfonts, gdm, libungif4g, firefox, desktop-file-utils,
+ nautilus, openoffice.org, gqview, gimp, inkscape, man, desktop-base, evince,
+ gcalctool-gtk, vlc, vlc-nox, file-roller, eog, gedit, gnome-keyring-manager,
+ gnome-terminal, gnome-user-guide, gnome-utils, yelp, gnome-panel, gnome-media,
+ gnome-netstatus-applet, gnome-nettool, units, sun-java6-bin, sun-java6-jre,
+ sun-java6-plugin, mozilla-plugin-vlc, mozilla-thunderbird-enigmail, iptables,
+ xds-katrina-agent, xds-default-settings, xds-start-swap, xds-net-security,
+ xds-flash-plugin, qgo, gnugo, eboard, bombermaze, codebreaker, gnudoku,
+ gnome-games, gtetrinet, msttcorefonts, strace, telnet, xrestop, gmessage,
+ xds-thintropy-kernel, simtone-xsession-trial1, tuxpaint, tuxpaint-config,
+ tuxpaint-data, tuxpaint-stamps-default, krecipes, krecipes-data,
+ krecipes-doc, gramps, gnome-session, imagemagick, rawstudio
+Maintainer: <ptadmin@simtone.net>
+Description: XDS thintropy trial package for Project Thintropy
+ Meta package for guests in Project Thintropy.
+ For more information, please visit http://simtone.net
