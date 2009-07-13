@@ -1,0 +1,72 @@
+#!/bin/sh
+
+# See file ../COPYING for license.
+#
+# This is a work of Michael Richardson (C) 2009 <mcr@simtone.net>
+#
+# You will need to adapt it to your local situation.
+#
+
+set -e
+
+mount -t proc proc /proc
+mount -t sysfs sysfs /sys
+
+cat >/etc/apt/sources.list <<EOF
+deb http://tbm800.thintropy.com/thintropy vL002 main
+deb http://tbm800.thintropy.com/ubuntu feisty 	       main restricted multiverse
+deb http://tbm800.thintropy.com/ubuntu feisty-security main restricted multiverse
+EOF
+
+apt-get update
+apt-get -y --force-yes install wget curl
+
+wget -q http://tbm800.thintropy.com/medibuntu/medibuntu-key.gpg -O- | apt-key add -
+wget -q http://tbm800.thintropy.com/thintropy/ptadmin@xdsinc.net.pgp -O- | apt-key add -
+
+cat >/etc/apt/sources.list <<EOF
+deb http://tbm800.thintropy.com/thintropy vL002 main
+deb http://tbm800.thintropy.com/ubuntu feisty 	       main restricted multiverse
+deb http://tbm800.thintropy.com/ubuntu feisty-security main restricted multiverse
+deb http://tbm800.thintropy.com/ubuntu feisty-updates  main restricted multiverse
+deb http://tbm800.thintropy.com/medibuntu feisty free non-free
+deb ftp://ftp.nrc.ca/pub/systems/linux/ubuntu feisty   main restricted universe multiverse
+deb http://ca.archive.ubuntu.com/ubuntu/ feisty-updates main restricted
+deb http://ca.archive.ubuntu.com/ubuntu/ feisty universe
+deb http://ca.archive.ubuntu.com/ubuntu/ feisty multiverse
+deb http://archive.ubuntu.com/ubuntu feisty-backports main universe multiverse restricted
+deb http://security.ubuntu.com/ubuntu feisty-security main restricted
+EOF
+
+mkdir -p /usr/opt 
+ln -s -f /usr/opt /opt
+
+apt-get update
+
+apt-get -y --force-yes install xds-thintropy-trial1
+apt-get -f install
+apt-get -y --force-yes install gramps
+
+apt-get -y --force-yes upgrade
+
+# not sure why this is necessary
+ln -s -f /etc/xdg/xubuntu/gdm/gdm.conf /etc/gdm/gdm-cdd.conf
+
+# update alternatives
+update-alternatives --set x-www-browser /usr/bin/firefox
+
+mkdir -p /lib/modules/2.6.18-xenU
+
+# now turn off some daemons which we were forced to install.
+echo 'AVAHI_DAEMON_START=0' >/etc/default/avahi-daemon
+
+update-rc.d -f apmd remove; update-rc.d apmd stop 19 2 .
+update-rc.d -f keyboard-setup remove; update-rc.d keyboard-setup stop 06 S .
+rm -f /etc/event.d/tty[23456]
+echo 'OPTIONS="-i 127.0.0.1"' >/etc/default/portmap
+
+cd /
+dpkg --list >base.list
+
+umount /proc
+umount /sys

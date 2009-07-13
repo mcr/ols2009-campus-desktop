@@ -1,0 +1,13 @@
+#!/bin/sh
+
+colnum 2 dpkg.list 		          		 | sort  >/tmp/dpkg_1-$$.list
+colnum 2 /proj/thintropy/skeletons/production/vl2007-40b/root/base.list | sort  >/tmp/dpkg_2-$$.list
+
+if diff -u /tmp/dpkg_2-$$.list /tmp/dpkg_1-$$.list | grep '^+'
+then
+	echo OKAY
+	exit 0
+fi
+exit 1
+
+
