@@ -1,0 +1,13 @@
+name = "12-00-00-aa-21-11"
+memory = "128"
+kernel = "/images/kernel/vmlinuz-vL2007-45t1"
+ramdisk = "/images/initrd/initrd-vL2007-45t1"
+nfs_server = "172.23.1.250"
+nfs_root = "/exports/root/12-00-00-aa-11-11/,rsize=1024,wsize=1024"
+root = "/dev/nfs ro"
+vif = [ 'mac=12:00:00:aa:21:11, bridge=back1',
+        'mac=12:00:00:bb:21:11, bridge=front' ]
+ip = "172.23.2.1"
+netmask = "255.255.240.0"
+on_reboot = "restart"
+on_crash =  "restart"
