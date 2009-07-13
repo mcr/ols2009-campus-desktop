@@ -1,0 +1,4 @@
+#!/bin/sh
+
+host=`cat $HOME/.mac`
+sudo /usr/sbin/xm destroy $host
